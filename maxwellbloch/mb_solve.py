@@ -79,6 +79,11 @@ class MBSolve(ob_solve.OBSolve):
 
         return self.z_step()/self.z_steps_inner
 
+    def z_steps_total(self):
+        """ Total number of inner steps. """
+
+        return self.z_steps*self.z_steps_inner
+
     def build_velocity_classes(self, velocity_classes={}):
 
         self.velocity_classes = {}
@@ -179,8 +184,6 @@ class MBSolve(ob_solve.OBSolve):
         return self.Omegas_zt, self.states_zt
 
     def mbsolve_euler(self, rho0=None, recalc=True, pbar_chunk_size=0):
-
-        len_z = len(self.zlist)-1 # only for printing progress
 
         # For the interpolation
         rabi_freq_ones = np.ones(len(self.ob_atom.fields))
